@@ -1,0 +1,218 @@
+html, 
+body {
+    height: 100%;
+  }
+
+body {
+  background-color: #A0BFE0;
+  padding-top: 30px; 
+}
+
+.login, .register {
+  display: flex;
+  align-items: center;
+  padding-bottom: 40px;
+}
+
+.form-login {
+  max-width: 330px;
+}
+
+.form-login input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-login input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+ 
+.btn-login .badge { 
+  color: #5767BF; 
+  background-color: #FFFFFF; 
+}
+
+/* Register */
+
+.background {
+  background-color: #4A55A2;
+  color: rgb(31, 33, 34);
+  border-radius: 0%;
+}
+
+.form-register {
+  max-width: 400px;
+}
+
+.linea {
+  border-width: 2px;
+  border-color: white;
+}
+
+/* Main */
+.profile {
+  font-style: normal;
+  font-size: x-large;
+}
+
+.dollar-sign {
+  font-size: xx-large;
+  font-weight: bold;
+  color: #000000;
+}
+
+.show-funds {
+  font-size: xx-large;
+  font-weight: bold;
+  color: #363457;
+}
+
+.fa-eye, .fa-eye-slash {
+  font-size: larger;
+}
+
+.toggle-funds {
+  color: grey;
+}
+
+.toggle-funds:hover {
+  color: #363457;
+  cursor: pointer;
+}
+
+.btn-main { 
+  color: #fdfdfd; 
+  background-color: #3d59f7; 
+  border-color: #2D366B; 
+} 
+
+.sticky-button {
+  position: sticky;
+  top: 5px;
+  z-index: 4000;
+}
+
+.toggle-filter:hover {
+  color: grey;
+  cursor: pointer;
+}
+
+.filter {
+  display: none;
+}
+
+.btn-main:hover { 
+  color: #FFFFFF; 
+  background-color: #683f9d; 
+  border-color: #2D366B; 
+} 
+
+.nav-color {
+  background-color: #4A55A2; 
+}
+
+.name-container {
+  color: #fdfdfd;
+}
+
+.app-container {
+  border: 7px solid black;
+  max-width: 900px;
+  background-color: white;
+  border-radius: 0px; 
+}
+
+.historial {
+  border-top: #2D366B ;
+  color: #000000;
+}
+
+.history-table {
+  background-color: #5767BF;
+}
+
+.history-header {
+  background-color: #52b794;
+}
+
+.custom-hr {
+  border: none;
+  height: 2px;
+  background-color: #4A55A2;
+}
+
+.description {
+  font-size: 25px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.date {
+  text-align: left;
+}
+
+.category {
+  text-align: left;
+}
+
+[class*="amount-"] {
+  text-align: right;
+  font-weight: bold;
+  font-size: large;
+}
+
+.amount-income {
+  font-size: x-large;
+}
+
+.amount-expenses{
+  font-size: x-large;
+}
+
+.date-range {
+  text-align: left;
+}
+
+.pointer-cursor {
+  cursor: pointer;
+}
+
+/* Icons */
+
+.bi-p {
+  color: inherit;
+}
+
+.bi-p:hover {
+  color: grey;
+}
+
+.bi-t {
+  color: #d34d4d;
+}
+
+.bi-t:hover {
+  color: #a80707;
+}
+
+.bi-filter{
+  display: inline;
+  font-style: normal;
+  font-size: large;
+}
+
+.bi-caret-up-fill {
+  display: none;
+  font-style: normal;
+  font-size: large;
+}
+
+/* Transaction */
+
+.form-transaction {
+  max-width: 450px;
+}
+

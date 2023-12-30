@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <title>Fluxe - Transacción</title>
+
+   <!-- Bootstrap -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.0/dist/lux/bootstrap.min.css">
+   <!-- Sweetalert2 -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.0/dist/sweetalert2.min.css">
+
+   {% load static %}
+    <link rel="stylesheet" href="{% static 'Aplicacion/style.css' %}">
+    <link rel="icon" href="{% static 'Aplicacion/img/Fluxe.png' %}" type="image/png">
+
+</head>
+<body class="transaction text-center">
+   <div class="w-100 m-auto p-4">
+      <div class="form-transaction m-auto p-4 background" >
+         <header class="w-100">
+            <h2 class="text-uppercase text-center text-white">Transacción</h2>
+            <hr class="linea">
+         </header>
+         <form name="TransactionForm" id="TransactionForm" method="post"> 
+            {% csrf_token %}
+            <div>
+               {% load widget_tweaks %}
+               <div class="mb-3d-flex align-items-center form-control mb-3">
+                  <div>
+                     {% for radio in transaction_form.type %}
+                        <div class="form-check form-check-inline">
+                           {{ radio.tag }}
+                           <label class="form-check-label custom-control-label" for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
+                        </div>
+                     {% endfor %}
+                  </div>
+               </div>
+
+               <div class="form-floating mb-3">
+                  {{ transaction_form.description|add_class:"form-control"|attr:"placeholder:Nombre de la transacción*"|attr:"id:name_input"}}
+                  <label for="name_input">Descripción*</label>
+               </div>
+
+               <div class="form-floating mb-3">
+                  {{ transaction_form.amount|add_class:"form-control"|attr:"placeholder:Monto*"|attr:"id:amount_input"}}
+                  <label for="amount_input">Monto*</label>
+               </div>
+
+               <div class="form-floating mb-3">
+               {{ transaction_form.date|add_class:"form-control"|attr:"placeholder:Fecha*"|attr:"id:date_input"|attr:"type:date"}}
+               <label for="date_input">Fecha*</label>
+               </div>
+
+               <div class="form-floating mb-3">
+                  {{ transaction_form.category|add_class:"form-control"|attr:"placeholder:Categoria*"|attr:"id:category_input"}}
+                  <label for="category_input">Categoria*</label>
+               </div>
+
+               <div id="val-box" class="text-white mb-3" hidden>
+                  <h2 id="val-msg">Los siguiente campos son invalidos:</h2>
+                  <ul id="val-list"></ul>
+               </div>
+
+               <div class="row justify-content-between">
+                  <div class="col-4">
+                     <button class="btn btn-info w-100" id="back-btn" name="back-btn" type="button" onclick="window.location.href='/'">Volver</button>
+                  </div>
+                  <div class="col-5">
+                     <button class="btn btn-dark w-100" id="transaction_btn" name="transaction_btn" type="button" onclick="validateForm()">Añadir</button>
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+
+      <img src="{% static 'Aplicacion/img/Fluxe-removebg-preview.png' %}" alt="logo de la compañia">
+
+   </div>
+
+
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.0/dist/sweetalert2.min.js"></script>
+   <script src="{% static 'Aplicacion/js/validationTransaction.js' %}"></script>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <title>Fluxe - Registro</title>
+
+   <!-- Bootstrap -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.0/dist/lux/bootstrap.min.css">
+   <!-- Sweetalert2 -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.0/dist/sweetalert2.min.css">
+
+   {% load static %}
+    <link rel="stylesheet" href="{% static 'Aplicacion/style.css' %}">
+    <link rel="icon" href="{% static 'Aplicacion/img/Fluxe.png' %}" type="image/png">
+
+</head>
+<body class="register text-center">
+   <div class="w-100 m-auto p-4">
+      <div class="form-register w-100 m-auto p-4 background " >
+         <header class="w-100">
+            <h2 class="text-uppercase text-center text-white"> Crea tu usuario</h2>
+            <hr class="linea">
+         </header>
+         <form name="RegisterForm" id="RegisterForm" method="post">
+            {% csrf_token %}
+            <div>
+               {% load widget_tweaks %}
+
+               <div class="form-floating mb-3">
+                  {{ register_form.username|add_class:"form-control"|attr:"placeholder:Usuario (obligatorio)"|attr:"id:user_input"}}
+                  <label for="user_input">Usuario*</label>
+               </div>
+
+               <div class="form-floating mb-3">
+                  {{ register_form.email|add_class:"form-control"|attr:"placeholder:Correo (obligatorio)"|attr:"id:email_input"}}
+                  <label for="email_input">Correo*</label>
+               </div>
+
+               <div class="form-floating mb-3">
+               {{ register_form.password1|add_class:"form-control"|attr:"placeholder:Contraseña (obligatorio)"|attr:"id:password_input"}}
+               <label for="password_input">Contraseña*</label>
+               </div>
+
+               <div class="form-floating mb-3">
+                  {{ register_form.password2|add_class:"form-control"|attr:"placeholder:Repetir contraseña (obligatorio)"|attr:"id:repeatPassword_input"}}
+                  <label for="repeatPassword_input">Repetir contraseña*</label>
+               </div>
+
+               <div id="val-box" class="text-white mb-3" hidden>
+                  <h2 id="val-msg">Los siguiente campos son invalidos:</h2>
+                  <ul id="val-list"></ul>
+               </div>
+
+               <button class="btn btn-primary w-50" id="register" name="register" type="button" onclick="validateForm()" >Crear usuario</button>
+            </div>
+         </form>
+      </div>
+
+      <img src="{% static 'Aplicacion/img/Fluxe-removebg-preview.png' %}" alt="logo de la compañia">
+
+   </div>
+
+
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.0/dist/sweetalert2.min.js"></script>
+   <script src="{% static 'Aplicacion/js/validationRegister.js' %}"></script>
+
+</body>
+</html>
