@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block titulo %}
+Good Farm - Estadísticas
+{% endblock %}
+
+<body>
+    {% block data_image %}
+    <div class="parallax-window" data-parallax="scroll"
+      data-image-src="{{ url_for('static', filename='img/pexels-markus-spiske-2818573.jpg' )}}">
+      {% endblock %}
+      <div class="container-fluid">
+        {% block content %}
+        <section class="row" id="tmInicio">
+          <div class="col-12 tm-inicio-container">
+            <div class="tm-bg-black-transparent text-center tm-inicio-header">
+              <h2 class="text-uppercase tm-inicio-page-title">Estadísticas</h2>
+              <p class="tm-inicio-description">
+                A continuación, se presentan dos gráficos: uno muestra todas las donaciones y 
+                el otro muestra todos los pedidos. Ambos gráficos están divididos según su tipo.
+              </p>
+            </div>
+          </div>
+        </section>
+        <div class="col-12 tm-inicio-container mb-3 mt-3 d-flex align-items-center">
+          <div class="tm-bg-black-transparent text-center">
+            <h2 class="tm-inicio-page-title2">Donaciones</h2>
+          </div>
+        </div>
+        <div class="stats-container">
+            <figure class="highcharts-figure">
+                <div id="graficoD"></div>
+                <div class="tm-bg-black-transparent text-center mb-3 mt-3 tm-inicio-page-title3">
+                <p class="highcharts-description">
+                    El gráfico anterior muestra el total de donaciones según su tipo.
+                </p>
+                </div>
+            </figure>
+        </div>
+        <div class="col-12 tm-inicio-container mb-3 mt-3 d-flex align-items-center">
+            <div class="tm-bg-black-transparent text-center">
+              <h2 class="tm-inicio-page-title2">Pedidos</h2>
+            </div>
+          </div>
+          <div class="stats-container">
+            <figure class="highcharts-figure">
+                <div id="graficoP"></div>
+                <div class="tm-bg-black-transparent text-center mb-3 mt-3 tm-inicio-page-title3">
+                <p class="highcharts-description">
+                    El gráfico anterior muestra el total de pedidos según su tipo.
+                </p>
+                </div>
+            </figure>
+        </div>
+        {% endblock %}
+      </div>
+    </div>
+    {%block javascript %}
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="{{ url_for('static', filename='js/stats.js' )}}"></script>
+    {% endblock %}
+  </body>
+  
+  </html>
