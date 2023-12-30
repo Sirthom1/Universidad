@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% block titulo %}
+Good Farm - Ver donaciones
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick.css' )}}" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick-theme.css' )}}" />
+{% endblock %}
+
+<body id="servicesPage">
+  {% block data_image %}
+  <div class="parallax-window" data-parallax="scroll"
+    data-image-src="{{ url_for('static', filename='img/pexels-adonyi-gábor-1400172.jpg' )}}">
+    {% endblock %}
+    <div class="container-fluid">
+      <!-- Tabla de ver donaciones -->
+      {% block content %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Comuna</th>
+            <th>Tipo</th>
+            <th>Cantidad</th>
+            <th>Fecha</th>
+            <th>Nombre</th>
+            <th>Foto</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if data %}
+          {% for conf in data%}
+          <tr id="{{conf.id}}" onclick="cambiar({{conf.id}})">
+            <td class="align-middle"> {{conf.comuna}} </td>
+            <td class="align-middle"> {{conf.tipo}} </td>
+            <td class="align-middle"> {{conf.cantidad}} </td>
+            <td class="align-middle"> {{conf.fecha}} </td>
+            <td class="align-middle"> {{conf.nombre}} </td>
+            <td class="align-middle"> {% for foto in conf.foto %}
+              <img src="{{ foto.ruta }}" alt="Foto de la donación" class="tam120">
+              {% endfor %}
+            </td>
+          </tr>
+          {% endfor %}
+          {% endif %}
+        </tbody>
+      </table>
+      <div>
+        {% if pagina_actual > 1 %}
+        <button type="button" onclick="window.location.href='{{ url_for('ver_donaciones', pagina=pagina_actual-1) }}'"
+          class="btn btn-primary tm-btn-submit rounded-0">
+          Página anterior
+        </button>
+        {% endif %}
+
+        {% if siguiente %}
+        <button type="button" onclick="window.location.href='{{ url_for('ver_donaciones', pagina=pagina_actual+1) }}'"
+          class="btn btn-primary tm-btn-submit rounded-0">
+          Siguiente página
+        </button>
+        {% endif %}
+      </div>
+      {% endblock %}
+    </div>
+  </div>
+  {%block javascript %}
+  <script src="{{ url_for('static', filename='js/cambiarD.js' )}}"></script>
+  <script src="{{ url_for('static', filename='slick/slick.min.js' )}}"></script>
+  <script>
+    $(function () {
+      $('.tabgroup > div').hide();
+      $('.tabgroup > div:first-of-type').show();
+      $('.tabs a').click(function (e) {
+        e.preventDefault();
+        var $this = $(this),
+          tabgroup = '#' + $this.parents('.tabs').data('tabgroup'),
+          others = $this.closest('li').siblings().children('a'),
+          target = $this.attr('href');
+        others.removeClass('active');
+        $this.addClass('active');
+        $(tabgroup).children('div').hide();
+        $(target).show();
+
+        // Scroll to tab content (for mobile)
+        if ($(window).width() < 992) {
+          $('html, body').animate({
+            scrollTop: $("#first-tab-group").offset().top
+          }, 200);
+        }
+      })
+
+      $('.tm-carousel').slick({
+        dots: true,
+        infinite: false,
+        arrows: false,
+        speed: 300,
+        slidesToShow: 3,
+        slidesToScroll: 2,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              arrows: false,
+              slidesToShow: 2,
+              slidesToScroll: 1,
+              infinite: true,
+              dots: true
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              arrows: false,
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              arrows: false,
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+          // You can unslick at a given breakpoint now by adding:
+          // settings: "unslick"
+          // instead of a settings object
+        ]
+      });
+    });
+
+  </script>
+  {% endblock %}
+</body>
+
+</html>

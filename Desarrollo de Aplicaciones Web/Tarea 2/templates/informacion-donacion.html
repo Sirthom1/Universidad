@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% block titulo %}
+Good Farm - Información de donaciones
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick.css' )}}" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick-theme.css' )}}" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.0/dist/sweetalert2.min.css">
+{% endblock %}
+
+<body id="servicesPage">
+  {% block data_image %}
+  <div class="parallax-window" data-parallax="scroll"
+    data-image-src="{{ url_for('static', filename='img/pexels-mark-stebnicki-2255920.jpg' )}}">
+    {% endblock %}
+    <div class="container-fluid"> 
+      <!-- Tabla de ver donaciones -->
+      {% block content %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Región</th>
+            <th>Comuna</th>
+            <th>Calle y número</th>
+            <th>Tipo</th>
+            <th>Cantidad</th>
+            <th>Fecha</th>
+            <th>Descripción</th>
+            <th>Condiciones</th>
+            <th>Foto/s</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Celular</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if data %}
+          {% for conf in data%}
+          <tr id="{{conf.id}}">
+            <td class="align-middle"> {{conf.region}} </td>
+            <td class="align-middle"> {{conf.comuna}} </td>
+            <td class="align-middle"> {{conf.calle}} </td>
+            <td class="align-middle"> {{conf.tipo}} </td>
+            <td class="align-middle"> {{conf.cantidad}} </td>
+            <td class="align-middle"> {{conf.fecha}} </td>
+            <td class="align-middle"> {{conf.descripcion}} </td>
+            <td class="align-middle"> {{conf.condiciones}} </td>
+            <td class="align-middle"> {% for foto in conf.foto %}
+              <img src="{{ foto.ruta }}" alt="Foto de la donación 640x480" class="tam640"
+                onclick="agrandarImagen('{{ foto.ruta }}')">
+              {% endfor %}
+            </td>
+            <td class="align-middle"> {{conf.nombre}} </td>
+            <td class="align-middle"> {{conf.email}} </td>
+            <td class="align-middle"> {{conf.celular}} </td>
+          </tr>
+          {% endfor %}
+          {% endif %}
+        </tbody>
+      </table>
+      <button type="button" onclick="window.location.href='ver-donaciones'"
+        class="btn btn-primary tm-btn-submit rounded-0">
+        Volver para atrás
+      </button>
+      <button type="button" onclick="window.location.href='/'" class="btn btn-primary tm-btn-submit rounded-0">
+        Ir a inicio
+      </button>
+      {% endblock %}
+    </div>
+  </div>
+  {%block javascript %}
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.0/dist/sweetalert2.min.js"></script>
+  <script src="{{ url_for('static', filename='js/mostrar.js' )}}"></script>
+  <script src="{{ url_for('static', filename='slick/slick.min.js' )}}"></script>
+  <script>
+    $(function () {
+      $('.tabgroup > div').hide();
+      $('.tabgroup > div:first-of-type').show();
+      $('.tabs a').click(function (e) {
+        e.preventDefault();
+        var $this = $(this),
+          tabgroup = '#' + $this.parents('.tabs').data('tabgroup'),
+          others = $this.closest('li').siblings().children('a'),
+          target = $this.attr('href');
+        others.removeClass('active');
+        $this.addClass('active');
+        $(tabgroup).children('div').hide();
+        $(target).show();
+
+        // Scroll to tab content (for mobile)
+        if ($(window).width() < 992) {
+          $('html, body').animate({
+            scrollTop: $("#first-tab-group").offset().top
+          }, 200);
+        }
+      })
+
+      $('.tm-carousel').slick({
+        dots: true,
+        infinite: false,
+        arrows: false,
+        speed: 300,
+        slidesToShow: 3,
+        slidesToScroll: 2,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              arrows: false,
+              slidesToShow: 2,
+              slidesToScroll: 1,
+              infinite: true,
+              dots: true
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              arrows: false,
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              arrows: false,
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+          // You can unslick at a given breakpoint now by adding:
+          // settings: "unslick"
+          // instead of a settings object
+        ]
+      });
+    });
+
+  </script>
+  {% endblock %}
+</body>
+
+</html>
